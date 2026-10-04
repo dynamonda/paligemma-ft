@@ -1,16 +1,20 @@
+import argparse
 from transformers import AutoProcessor, PaliGemmaForConditionalGeneration
 from PIL import Image
 import torch
 
-model_id = "google/paligemma-3b-mix-224"
+model_id = "google/paligemma-3b-pt-448"
 
-image_path = "datas/images/car.jpg"
+parser = argparse.ArgumentParser(description="PailGemmaを実行する")
+parser.add_argument("image_path", type=str, help="画像のパス")
+args = parser.parse_args()
 
 
 def main() -> None:
     model = PaliGemmaForConditionalGeneration.from_pretrained(model_id).eval()
     processor = AutoProcessor.from_pretrained(model_id)
 
+    image_path = args.image_path
     image = Image.open(image_path)
 
     prompt = "キャプションは、"
