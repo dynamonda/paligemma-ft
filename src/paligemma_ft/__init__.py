@@ -17,7 +17,7 @@ def main() -> None:
     image_path = args.image_path
     image = Image.open(image_path)
 
-    prompt = "キャプションは、"
+    prompt = "Explain this image"
     model_inputs = processor(text=prompt, images=image, return_tensors="pt")
     input_len = model_inputs["input_ids"].shape[-1]
 
