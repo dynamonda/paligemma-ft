@@ -3,6 +3,8 @@ from transformers import AutoProcessor, PaliGemmaForConditionalGeneration
 from PIL import Image
 import torch
 
+from .immich import post_favorite_images
+
 model_id = "google/paligemma-3b-pt-448"
 
 parser = argparse.ArgumentParser(description="PailGemmaを実行する")
@@ -11,13 +13,15 @@ args = parser.parse_args()
 
 
 def main() -> None:
+    post_favorite_images()
+
     model = PaliGemmaForConditionalGeneration.from_pretrained(model_id).eval()
     processor = AutoProcessor.from_pretrained(model_id)
 
     image_path = args.image_path
     image = Image.open(image_path)
 
-    prompt = "Explain this image"
+    prompt = "What is this?"
     model_inputs = processor(text=prompt, images=image, return_tensors="pt")
     input_len = model_inputs["input_ids"].shape[-1]
 

@@ -8,7 +8,9 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "httpx>=0.28.1",
     "pillow>=12.3.0",
+    "python-dotenv>=1.2.4",
     "torch>=2.14.1",
     "transformers>=5.18.0",
 ]
