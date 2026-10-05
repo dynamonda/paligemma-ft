@@ -1,15 +1,8 @@
-import os
-
 import httpx
-from dotenv import load_dotenv
+from . import config
 
-load_dotenv()  # .envファイルから環境変数を読み込む
-
-IMMICH_SERVER_URL = os.getenv("IMMICH_SERVER_URL")
-IMMICH_API_KEY = os.getenv("IMMICH_API_KEY")
-
-search_url = f"{IMMICH_SERVER_URL}/api/search/metadata"
-headers = {"x-api-key": IMMICH_API_KEY, "Content-Type": "application/json"}
+search_url = f"{config.IMMICH_SERVER_URL}/api/search/metadata"
+headers = {"x-api-key": config.IMMICH_API_KEY, "Content-Type": "application/json"}
 
 payload = {"isFavorite": True, "type": "IMAGE", "size": 100}
 
